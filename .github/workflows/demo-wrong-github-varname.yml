@@ -1,0 +1,12 @@
+name: Demo Actionlint vs GitHub
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-if:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test avec une condition invalide
+        if: ${{ github.repository_name == 'monrepo' }} # variable inexistante
+        run: echo "Ce step ne sera jamais exécuté"
