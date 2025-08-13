@@ -1,0 +1,80 @@
+badly_formatted__if_error.yml:6:9: if: condition "xxx${{ always() }}yyy" is always evaluated to true because extra characters are around ${{ }} [if-cond]
+  |
+6 |     if: "xxx${{ always() }}yyy"
+  |         ^~~~~~~
+badly_formatted__incorrect_formatting.yml:7:13: invalid step ID "bad id". step ID must start with a letter or _ and contain only alphanumeric characters, -, or _ [id]
+  |
+7 |       - id: "bad id"
+  |             ^~~~
+badly_formatted__value_not_in_allowed_list.yml:5:14: label "linux-latest" is unknown. available labels are "windows-latest", "windows-latest-8-cores", "windows-2025", "windows-2022", "windows-2019", "ubuntu-latest", "ubuntu-latest-4-cores", "ubuntu-latest-8-cores", "ubuntu-latest-16-cores", "ubuntu-24.04", "ubuntu-24.04-arm", "ubuntu-22.04", "ubuntu-22.04-arm", "ubuntu-20.04", "macos-latest", "macos-latest-xl", "macos-latest-xlarge", "macos-latest-large", "macos-15-xlarge", "macos-15-large", "macos-15", "macos-14-xl", "macos-14-xlarge", "macos-14-large", "macos-14", "macos-13-xl", "macos-13-xlarge", "macos-13-large", "macos-13", "self-hosted", "x64", "arm", "arm64", "linux", "macos", "windows". if it is a custom label for self-hosted runner, set list of labels in actionlint.yaml config file [runner-label]
+  |
+5 |     runs-on: linux-latest
+  |              ^~~~~~~~~~~~
+constraint_error__function_error.yml:7:24: number of arguments is wrong. function "contains(string, string) -> bool" takes 2 parameters but 1 arguments are given [expression]
+  |
+7 |       - run: echo "${{ contains('abc') }}"
+  |                        ^~~~~~~~~~~~~~~
+constraint_error__function_error.yml:7:24: number of arguments is wrong. function "contains(array<any>, any) -> bool" takes 2 parameters but 1 arguments are given [expression]
+  |
+7 |       - run: echo "${{ contains('abc') }}"
+  |                        ^~~~~~~~~~~~~~~
+constraint_error__out_of_bounds_value.yml:6:22: value at "timeout-minutes" must be greater than zero: 0 [syntax-check]
+  |
+6 |     timeout-minutes: 0
+  |                      ^
+cron_error__format__LINT_ONLY.yml:5:13: invalid CRON format "*/5 * * * * *" in schedule event: expected exactly 5 fields, found 6: [*/5 * * * * *] [events]
+  |
+5 |     - cron: "*/5 * * * * *"
+  |             ^~~~
+cyclic_dependencies__cyclic_dependencies.yml:4:3: cyclic dependencies in "needs" job configurations are detected. detected cycle is "a" -> "b" -> "a" [job-needs]
+  |
+4 |   a:
+  |   ^~
+demo-cyclic-dep.yml:8:3: cyclic dependencies in "needs" job configurations are detected. detected cycle is "job1" -> "job2" -> "job1" [job-needs]
+  |
+8 |   job1:
+  |   ^~~~~
+demo-wrong-cron-format.yml:7:13: invalid CRON format "*/5 * * * * *" in schedule event: expected exactly 5 fields, found 6: [*/5 * * * * *] [events]
+  |
+7 |     - cron: "*/5 * * * * *"   # minute heure jour mois jour-semaine  (+1 champ en trop)
+  |             ^~~~
+demo-wrong-cron-format.yml:9:13: invalid CRON format "60 * * * *" in schedule event: end of range (60) above maximum (59): 60 [events]
+  |
+9 |     - cron: "60 * * * *"
+  |             ^~~
+demo-wrong-github-varname.yml:11:17: property "repository_name" is not defined in object type {action: string; action_path: string; action_ref: string; action_repository: string; action_status: string; actor: string; actor_id: string; api_url: string; artifact_cache_size_limit: number; base_ref: string; env: string; event: object; event_name: string; event_path: string; graphql_url: string; head_ref: string; job: string; output: string; path: string; ref: string; ref_name: string; ref_protected: bool; ref_type: string; repository: string; repository_id: string; repository_owner: string; repository_owner_id: string; repository_visibility: string; repositoryurl: string; retention_days: number; run_attempt: string; run_id: string; run_number: string; secret_source: string; server_url: string; sha: string; state: string; step_summary: string; token: string; triggering_actor: string; workflow: string; workflow_ref: string; workflow_sha: string; workspace: string} [expression]
+   |
+11 |         if: ${{ github.repository_name == 'monrepo' }} # variable inexistante
+   |                 ^~~~~~~~~~~~~~~~~~~~~~
+duplicated__matrix.yml:8:29: duplicate value "ubuntu-latest" is found in matrix "os". the same value is at line:8,col:14 [matrix]
+  |
+8 |         os: [ubuntu-latest, ubuntu-latest]
+  |                             ^~~~~~~~~~~~~~
+incompatibility__os.yml:8:16: shell name "cmd" is invalid on macOS or Linux. available names are "bash", "pwsh", "python", "sh" [shell-name]
+  |
+8 |         shell: cmd
+  |                ^~~
+invalid_file__bad__LINT_ONLY.yml:9:0: could not parse as YAML: yaml: line 9: did not find expected node content [syntax-check]
+  |
+9 |     bad: [
+  | 
+missing__job_dependency.yml:4:3: job "a" needs job "b" which does not exist in this workflow [job-needs]
+  |
+4 |   a:
+  |   ^~
+missing__key.yml:4:3: "runs-on" section is missing in job "a" [syntax-check]
+  |
+4 |   a:
+  |   ^~
+not_allowed__not_allowed.yml:7:20: object, array, and null values should not be evaluated in template with ${{ }} but evaluating the value of type {} [expression]
+  |
+7 |       - run: echo "${{ github.event.inputs }}"
+  |                    ^~~
+untrusted__untrusted.yml:7:24: "github.event.head_commit.message" is potentially untrusted. avoid using it directly in inline scripts. instead, pass it through an environment variable. see https://docs.github.com/en/actions/security-for-github-actions/security-guides/security-hardening-for-github-actions for more details [expression]
+  |
+7 |       - run: echo "${{ github.event.head_commit.message }}"
+  |                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+wrong_expected_value_type__wrong_expected_value_type.yml:5:14: label "123" is unknown. available labels are "windows-latest", "windows-latest-8-cores", "windows-2025", "windows-2022", "windows-2019", "ubuntu-latest", "ubuntu-latest-4-cores", "ubuntu-latest-8-cores", "ubuntu-latest-16-cores", "ubuntu-24.04", "ubuntu-24.04-arm", "ubuntu-22.04", "ubuntu-22.04-arm", "ubuntu-20.04", "macos-latest", "macos-latest-xl", "macos-latest-xlarge", "macos-latest-large", "macos-15-xlarge", "macos-15-large", "macos-15", "macos-14-xl", "macos-14-xlarge", "macos-14-large", "macos-14", "macos-13-xl", "macos-13-xlarge", "macos-13-large", "macos-13", "self-hosted", "x64", "arm", "arm64", "linux", "macos", "windows". if it is a custom label for self-hosted runner, set list of labels in actionlint.yaml config file [runner-label]
+  |
+5 |     runs-on: 123
+  |              ^~~

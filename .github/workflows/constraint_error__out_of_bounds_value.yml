@@ -1,0 +1,8 @@
+name: ce-out_of_bounds_value
+on: { workflow_dispatch: {} }
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 0
+    steps:
+      - run: echo "timeout too small"

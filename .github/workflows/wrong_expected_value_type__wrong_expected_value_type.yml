@@ -1,0 +1,9 @@
+# Variante A — mauvais type sur 'strategy' (doit être mapping)
+name: wrong-expected-value-type
+on: { workflow_dispatch: {} }
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy: "not a mapping"   # ❌ wrong type
+    steps:
+      - run: echo "type error on strategy"

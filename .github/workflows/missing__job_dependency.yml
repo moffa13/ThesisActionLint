@@ -1,0 +1,8 @@
+name: missing-job_dependency
+on: { workflow_dispatch: {} }
+jobs:
+  a:
+    runs-on: ubuntu-latest
+    needs: b
+    steps:
+      - run: echo "missing dependency"

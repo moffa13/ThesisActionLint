@@ -1,0 +1,8 @@
+name: bf-incorrect_formatting
+on: { workflow_dispatch: {} }
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - id: "bad id"
+        run: echo "invalid step id"

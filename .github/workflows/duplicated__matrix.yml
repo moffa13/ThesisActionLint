@@ -1,0 +1,10 @@
+name: duplicated-matrix
+on: { workflow_dispatch: {} }
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, ubuntu-latest]
+    steps:
+      - run: echo "dup matrix"

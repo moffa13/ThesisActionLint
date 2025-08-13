@@ -1,0 +1,8 @@
+name: bf-if_error
+on: { workflow_dispatch: {} }
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    if: "xxx${{ always() }}yyy"
+    steps:
+      - run: echo "if_error demo"

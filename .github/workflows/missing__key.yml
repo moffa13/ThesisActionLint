@@ -1,0 +1,6 @@
+name: missing-key
+on: { workflow_dispatch: {} }
+jobs:
+  a:
+    steps:
+      - run: echo "no runs-on"
