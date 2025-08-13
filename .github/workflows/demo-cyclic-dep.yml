@@ -1,0 +1,18 @@
+# .github/workflows/cyclic-dependencies.yml
+name: cyclic-dependencies-demo
+
+on:
+  workflow_dispatch:   # permet de le lancer manuellement
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    needs: job2          # ❌ job1 dépend de job2
+    steps:
+      - run: echo "Job 1 executed"
+
+  job2:
+    runs-on: ubuntu-latest
+    needs: job1          # ❌ job2 dépend de job1 → cycle
+    steps:
+      - run: echo "Job 2 executed"
