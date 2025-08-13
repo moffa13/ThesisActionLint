@@ -1,0 +1,15 @@
+# .github/workflows/invalid-cron.yml
+name: invalid-cron-demo
+
+on:
+  # ❌ 6 champs au lieu de 5  → "invalid CRON format"
+  schedule:
+    - cron: "*/5 * * * * *"   # minute heure jour mois jour-semaine  (+1 champ en trop)
+  # ❌ minute hors plage (60) → "invalid CRON format"
+    - cron: "60 * * * *"
+
+jobs:
+  say-hello:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "This will never be scheduled because cron is invalid."
