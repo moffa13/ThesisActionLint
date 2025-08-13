@@ -1,0 +1,7 @@
+name: bf-value_not_in_allowed_list
+on: { workflow_dispatch: {} }
+jobs:
+  test:
+    runs-on: linux-latest
+    steps:
+      - run: echo "unknown label"
